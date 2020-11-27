@@ -1,4 +1,4 @@
-package com.devjapa.hrworker;
+package com.devjapa.in28minutes.helloworld;
 
 public class HelloWorldBean {
 

@@ -1,4 +1,4 @@
-package com.devjapa.hrworker;
+package com.devjapa.in28minutes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

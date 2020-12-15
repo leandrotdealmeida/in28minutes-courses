@@ -28,29 +28,29 @@ public class FilterController {
 	public MappingJacksonValue retriveDinamicSomeBean() {
 		SomeBean someBean = new SomeBean("value1", "value2", "value3");
 
-		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field2");
+		MappingJacksonValue mapping = dinamicFilter(someBean, "field1", "field2");
+
+		return mapping;
+	}
+
+
+	@GetMapping("/filtering-list-dinamic")
+	public MappingJacksonValue retriveDinamicListSomeBean() {
+		List<SomeBean> list = Arrays.asList(new SomeBean("value1", "value2", "value3"),	new SomeBean("value1", "value2", "value3"));
+
+		MappingJacksonValue mapping = dinamicFilter(list, "field2", "field3");
+
+		return mapping;
+	}
+	
+	private MappingJacksonValue dinamicFilter(Object someBean, String field1, String field2) {
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(field1, field2);
 
 		FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBean", filter);
 
 		MappingJacksonValue mapping = new MappingJacksonValue(someBean);
 
 		mapping.setFilters(filters);
-
-		return mapping;
-	}
-
-	@GetMapping("/filtering-list-dinamic")
-	public MappingJacksonValue retriveDinamicListSomeBean() {
-		List<SomeBean> list = Arrays.asList(new SomeBean("value1", "value2", "value3"),	new SomeBean("value1", "value2", "value3"));
-		
-		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field2", "field3");
-
-		FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBean", filter);
-
-		MappingJacksonValue mapping = new MappingJacksonValue(list);
-
-		mapping.setFilters(filters);
-
 		return mapping;
 	}
 
